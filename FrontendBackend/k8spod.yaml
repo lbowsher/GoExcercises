@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontendbackend
+spec:
+  containers:
+  - name: backend
+    image: backend
+  - name: frontend
+    image: frontend

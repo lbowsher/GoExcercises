@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: getting-started
+spec:
+  serviceAccountName: go-tutorials-service-account
+  containers:
+  - name: getting-started
+    image: skaffold-example

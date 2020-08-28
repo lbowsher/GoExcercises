@@ -1,0 +1,15 @@
+# yaml so that skaffold can be used to build and push the code
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: frontendbackend
+build:
+  artifacts:
+  - image: backend
+    context: Backend
+  - image: frontend
+    context: Frontend
+deploy:
+  kubectl:
+    manifests:
+    - k8spod.yaml
