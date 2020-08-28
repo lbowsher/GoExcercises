@@ -54,7 +54,7 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 		owner = repo.GetOwner().GetLogin()
 		number = e.GetIssue().GetNumber()
 		//log.Println(e.GetNumber())
-		parseComment(*e.GetComment())
+		log.Println(parseCommentForRetest(*e.GetComment()))
 	default:
 		log.Printf("unknown event type %s\n", github.WebHookType(r))
 		return
@@ -69,6 +69,16 @@ func parseComment(com github.IssueComment) {
 		log.Println("Triggering Retest")
 		writeComment()
 	}
+}
+
+// Checks to see if /retest is in the comment and on it's own line
+func parseCommentForRetest(com github.IssueComment) bool {
+	body := com.GetBody()
+	//log.Println(body)
+	if strings.Contains(body, "\n/retest\n") {
+		return true
+	}
+	return false
 }
 
 // writes Retest Initiated after 
